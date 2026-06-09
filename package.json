@@ -1,0 +1,11 @@
+{
+  "name": "gh-health",
+  "version": "1.0.0",
+  "description": "Check the health of your GitHub repos — README, LICENSE, CI, stale branches, and more",
+  "bin": { "gh-health": "./cli.js" },
+  "main": "index.js",
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "keywords": ["github", "health", "lint", "repos", "cli"],
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}
