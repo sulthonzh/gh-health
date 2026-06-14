@@ -43,23 +43,18 @@ function checkHealth(repo, owner) {
   const defaultBranch = repo.defaultBranchRef?.name || 'main';
   const issues = [];
 
-  // README
   const hasReadme = files.some(f => /^readme/i.test(f));
   if (!hasReadme) issues.push({ severity: 'critical', message: 'Missing README' });
 
-  // LICENSE
   const hasLicense = files.some(f => /^license/i.test(f));
   if (!hasLicense) issues.push({ severity: 'warning', message: 'Missing LICENSE' });
 
-  // CI
   const hasCI = files.some(f => /\.(yml|yaml)$/i.test(f) && f.includes('work')) || files.includes('.github');
   if (!hasCI) issues.push({ severity: 'info', message: 'No CI config detected' });
 
-  // .gitignore
   const hasGitignore = files.includes('.gitignore');
   if (!hasGitignore) issues.push({ severity: 'info', message: 'Missing .gitignore' });
 
-  // package.json check
   const hasPackageJson = files.includes('package.json');
   if (hasPackageJson) {
     try {
@@ -71,15 +66,12 @@ function checkHealth(repo, owner) {
     } catch { /* ignore */ }
   }
 
-  // Stale branches
   const staleBranches = branches.filter(b => b !== defaultBranch);
   if (staleBranches.length > 3) issues.push({ severity: 'warning', message: `${staleBranches.length} non-default branches` });
 
-  // Age check
   const daysSinceUpdate = Math.floor((Date.now() - new Date(repo.updatedAt)) / 86400000);
   if (daysSinceUpdate > 180) issues.push({ severity: 'info', message: `Not updated in ${daysSinceUpdate} days` });
 
-  // Score: 100 minus penalties
   let score = 100;
   for (const issue of issues) {
     if (issue.severity === 'critical') score -= 30;
