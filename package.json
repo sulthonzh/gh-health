@@ -2,15 +2,25 @@
   "name": "gh-health",
   "version": "1.0.0",
   "description": "Check the health of your GitHub repos — README, LICENSE, CI, stale branches, and more",
-  "bin": { "gh-health": "./cli.js" },
+  "bin": {
+    "gh-health": "./cli.js"
+  },
   "main": "index.js",
   "files": [
     "cli.js",
     "index.js",
     "README.md"
   ],
-  "scripts": { "test": "node --test test/*.test.mjs" },
-  "keywords": ["github", "health", "lint", "repos", "cli"],
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "github",
+    "health",
+    "lint",
+    "repos",
+    "cli"
+  ],
   "author": "Sulthonzh <sulthonzh@example.com>",
   "license": "MIT",
   "repository": {
@@ -20,5 +30,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.31.0"
+  }
 }
